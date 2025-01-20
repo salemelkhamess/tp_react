@@ -11,6 +11,8 @@ const translations = {
         next: 'Next',
         page: 'Page',
         of: 'of',
+        reload_products: "Reload Product"
+
     },
     fr: {
         searchPlaceholder: 'Rechercher un produit...',
@@ -21,6 +23,7 @@ const translations = {
         next: 'Suivant',
         page: 'Page',
         of: 'sur',
+        reload_products: "Recharger les produits"
     },
 };
 

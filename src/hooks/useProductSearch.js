@@ -1,41 +1,84 @@
 import { useState, useEffect } from 'react';
 
-// TODO: Exercice 3.1 - Créer le hook useDebounce
-// TODO: Exercice 3.2 - Créer le hook useLocalStorage
-
 const useProductSearch = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]); // Produits filtrés
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // TODO: Exercice 4.2 - Ajouter l'état pour la pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState(''); // Terme de recherche
 
+  const fetchProducts = async (page = 1) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://api.daaif.net/products?delay=1000&page=${page}`);
+      if (!response.ok) throw new Error('Erreur réseau');
+      const data = await response.json();
+      setProducts(data.products);
+      setTotalPages(data.totalPages); // Supposons que l'API retourne le nombre total de pages
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Filtrer les produits en fonction du terme de recherche
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        // TODO: Exercice 4.2 - Modifier l'URL pour inclure les paramètres de pagination
-        const response = await fetch('https://api.daaif.net/products?delay=1000');
-        if (!response.ok) throw new Error('Erreur réseau');
-        const data = await response.json();
-        setProducts(data.products);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
+    if (searchTerm) {
+      const filtered = products.filter(product =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products); // Si aucun terme de recherche, afficher tous les produits
+    }
+  }, [searchTerm, products]);
 
-    fetchProducts();
-  }, []); // TODO: Exercice 4.2 - Ajouter les dépendances pour la pagination
+  // Recharger les produits
+  const reloadProducts = () => {
+    fetchProducts(currentPage);
+  };
 
-  // TODO: Exercice 4.1 - Ajouter la fonction de rechargement
-  // TODO: Exercice 4.2 - Ajouter les fonctions pour la pagination
+  // Aller à la page suivante
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+      fetchProducts(currentPage + 1);
+    }
+  };
 
-  return { 
-    products, 
-    loading, 
+  // Aller à la page précédente
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+      fetchProducts(currentPage - 1);
+    }
+  };
+
+  // Mettre à jour le terme de recherche
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
+  // Charger les produits au montage du composant ou lors du changement de page
+  useEffect(() => {
+    fetchProducts(currentPage);
+  }, [currentPage]);
+
+  return {
+    products: filteredProducts, // Retourner les produits filtrés
+    loading,
     error,
-    // TODO: Exercice 4.1 - Retourner la fonction de rechargement
-    // TODO: Exercice 4.2 - Retourner les fonctions et états de pagination
+    reloadProducts,
+    currentPage,
+    totalPages,
+    nextPage,
+    previousPage,
+    handleSearch // Retourner la fonction pour gérer la recherche
   };
 };
 

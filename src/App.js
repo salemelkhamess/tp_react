@@ -24,7 +24,6 @@ const App = () => {
               </div>
             </header>
             <main>
-              <ProductSearch />
               <ProductList />
             </main>
           </div>
