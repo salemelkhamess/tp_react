@@ -134,6 +134,7 @@ Utilisez localStorage pour stocker et récupérer la valeur.
 - [ ] 4.3 Documenter votre solution ici
 
 _Votre réponse pour l'exercice 4 :_
+je n'arrive pas a faire la pagination elle n'est pas trés claire pour moi
 ```
 Expliquez votre solution ici
 [Ajoutez vos captures d'écran]
