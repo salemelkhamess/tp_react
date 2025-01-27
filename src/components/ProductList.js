@@ -12,10 +12,6 @@ const ProductList = () => {
         loading,
         error,
         reloadProducts,
-        currentPage,
-        totalPages,
-        nextPage,
-        previousPage,
         handleSearch // Récupérer handleSearch
     } = useProductSearch();
 
@@ -68,26 +64,6 @@ const ProductList = () => {
                 ))}
             </div>
 
-            {/* Contrôles de pagination */}
-            <nav className="mt-4">
-                <ul className="pagination justify-content-center">
-                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                        <button className="page-link" onClick={previousPage}>
-                            {translate('previous')}
-                        </button>
-                    </li>
-                    <li className="page-item">
-            <span className="page-link">
-              {translate('page')} {currentPage} {translate('of')} {totalPages}
-            </span>
-                    </li>
-                    <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                        <button className="page-link" onClick={nextPage}>
-                            {translate('next')}
-                        </button>
-                    </li>
-                </ul>
-            </nav>
         </div>
     );
 };

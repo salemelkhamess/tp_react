@@ -6,7 +6,6 @@ const useProductSearch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState(''); // Terme de recherche
 
   const fetchProducts = async (page = 1) => {
@@ -18,7 +17,6 @@ const useProductSearch = () => {
       if (!response.ok) throw new Error('Erreur réseau');
       const data = await response.json();
       setProducts(data.products);
-      setTotalPages(data.totalPages); // Supposons que l'API retourne le nombre total de pages
     } catch (err) {
       setError(err.message);
     } finally {
@@ -43,21 +41,6 @@ const useProductSearch = () => {
     fetchProducts(currentPage);
   };
 
-  // Aller à la page suivante
-  const nextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
-      fetchProducts(currentPage + 1);
-    }
-  };
-
-  // Aller à la page précédente
-  const previousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-      fetchProducts(currentPage - 1);
-    }
-  };
 
   // Mettre à jour le terme de recherche
   const handleSearch = (term) => {
@@ -74,10 +57,6 @@ const useProductSearch = () => {
     loading,
     error,
     reloadProducts,
-    currentPage,
-    totalPages,
-    nextPage,
-    previousPage,
     handleSearch // Retourner la fonction pour gérer la recherche
   };
 };
