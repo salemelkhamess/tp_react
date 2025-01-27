@@ -53,7 +53,17 @@ Pour chaque exercice :
 
 _Votre réponse pour l'exercice 1 :_
 ```
-Expliquez votre solution ici
+L'objectif est de créer une fonctionnalité de recherche en temps réel qui :
+
+Attend que l'utilisateur arrête de taper pendant un certain temps (500 ms) avant de déclencher la recherche.
+
+Évite de faire des requêtes API à chaque frappe, ce qui optimise les performances.
+
+ Créer le hook useDebounce
+Ce hook prend une valeur (value) et un délai (delay).
+
+Il retourne une version "débouncée" de la valeur, qui ne sera mise à jour qu'après le délai spécifié.
+
 [Ajoutez vos captures d'écran]
 ```
 
@@ -66,7 +76,17 @@ Expliquez votre solution ici
 
 _Votre réponse pour l'exercice 2 :_
 ```
-Expliquez votre solution ici
+Le LanguageContext permettra de partager la langue sélectionnée et la fonction pour la changer dans toute l'application.
+ Créer le contexte
+Dans un fichier LanguageContext.js, définissez le contexte
+
+ Envelopper l'application avec LanguageProvider
+Dans votre fichier App.js, enveloppez votre application avec LanguageProvider pour que tous les composants aient accès au contexte.
+. Intégrer LanguageSelector dans l'interface
+Ajoutez le sélecteur de langue dans votre interface, par exemple dans le header de votre application.
+
+Dans App.js ou un autre composant parent
+
 [Ajoutez vos captures d'écran]
 ```
 
@@ -79,7 +99,30 @@ Expliquez votre solution ici
 
 _Votre réponse pour l'exercice 3 :_
 ```
-Expliquez votre solution ici
+Le hook useDebounce permet de retarder l'exécution d'une fonction (par exemple, une recherche) jusqu'à ce qu'aucun changement ne soit détecté pendant un délai spécifié. Cela évite de déclencher des actions trop fréquemment (comme des requêtes API à chaque frappe).
+
+Implémentation
+Créez un fichier useDebounce.js dans le dossier hooks.
+
+Utilisez useState pour stocker la valeur débouncée.
+
+Utilisez useEffect pour gérer le délai avec setTimeout.
+
+Utilisez useDebounce pour retarder la mise à jour d'une valeur (par exemple, un terme de recherche).
+
+Exemple dans ProductSearch
+const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+Objectif
+Le hook useLocalStorage permet de synchroniser un état React avec le stockage local du navigateur (localStorage). Cela permet de persister des données entre les rechargements de page.
+
+Implémentation
+Créez un fichier useLocalStorage.js dans le dossier hooks.
+
+Utilisez useState pour gérer l'état local.
+
+Utilisez localStorage pour stocker et récupérer la valeur.
+
 [Ajoutez vos captures d'écran]
 ```
 
@@ -91,6 +134,7 @@ Expliquez votre solution ici
 - [ ] 4.3 Documenter votre solution ici
 
 _Votre réponse pour l'exercice 4 :_
+je n'arrive pas a faire la pagination elle n'est pas trés claire pour moi
 ```
 Expliquez votre solution ici
 [Ajoutez vos captures d'écran]
