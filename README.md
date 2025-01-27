@@ -64,7 +64,7 @@ Ce hook prend une valeur (value) et un délai (delay).
 
 Il retourne une version "débouncée" de la valeur, qui ne sera mise à jour qu'après le délai spécifié.
 
-[Ajoutez vos captures d'écran]
+ l'image 2.png
 ```
 
 ### Exercice 2 : Context et Internationalisation
@@ -87,7 +87,7 @@ Ajoutez le sélecteur de langue dans votre interface, par exemple dans le header
 
 Dans App.js ou un autre composant parent
 
-[Ajoutez vos captures d'écran]
+ l'image 2.png
 ```
 
 ### Exercice 3 : Hooks Personnalisés
@@ -123,7 +123,7 @@ Utilisez useState pour gérer l'état local.
 
 Utilisez localStorage pour stocker et récupérer la valeur.
 
-[Ajoutez vos captures d'écran]
+ l'image 3.png
 ```
 
 ### Exercice 4 : Gestion Asynchrone et Pagination
